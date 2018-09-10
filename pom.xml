@@ -21,7 +21,19 @@
     </properties>
     <modules>
         <module>eurekaserver</module>
+        <module>commonentity</module>
+        <module>userservice</module>
     </modules>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>1.2.47</version>
+        </dependency>
+
+
+    </dependencies>
     <dependencyManagement>
         <dependencies>
             <dependency>
