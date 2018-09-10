@@ -42,6 +42,8 @@ public class Const {
         String ERROR_OLD_PASSWORD="原密码错误！！！";
         String SUCCESS_UPDATE="更新成功！！";
         String FAILUE_UPDATE="更新失败";
+        String NEED_LOGIN="未登录，需要强制登录";
+        String NOT_MANAGER="非管理用户";
     }
 
     public static final String EMAIL="email";

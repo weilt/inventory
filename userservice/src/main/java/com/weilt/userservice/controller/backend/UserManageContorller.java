@@ -32,7 +32,7 @@ public class UserManageContorller {
             if(user.getRole() == Const.Role.ROLE_ADMIN){
                 session.setAttribute(Const.CURRENT_USER,user);
             }else{
-                return ServerResponse.createByErrorMessage("非管理员，无法登录");
+                return ServerResponse.createByErrorMessage(Const.User.NOT_MANAGER);
             }
         }
         return response;
