@@ -10,6 +10,7 @@
         <module name="commonentity" />
         <module name="eurekaserver" />
         <module name="inventory" />
+        <module name="productservice" />
         <module name="userservice" />
       </profile>
     </annotationProcessing>

@@ -21,8 +21,9 @@
     </properties>
     <modules>
         <module>eurekaserver</module>
-        <module>commonentity</module>
+
         <module>userservice</module>
+        <module>cartservice</module>
     </modules>
 
     <dependencies>
