@@ -10,6 +10,7 @@ import com.weilt.commonentity.service.IFileService;
 import com.weilt.productservice.service.IProductService;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.util.PropertiesUtil;
+import org.checkerframework.checker.units.qual.C;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -41,7 +42,7 @@ public class ProductManageController {
     public ServerResponse productSave(HttpSession session, Product product) {
         User user =(User) session.getAttribute(Const.CURRENT_USER);
         if(user == null){
-            return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(),"用户未登录");
+            return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(),Const.User.NEED_LOGIN);
         }
         //校验是否管理员
         if(user.getRole() == Const.Role.ROLE_ADMIN){
@@ -49,7 +50,7 @@ public class ProductManageController {
             return iProductService.saveOrUpdateProduct(product);
         }
         else {
-            return ServerResponse.createByErrorMessage("无权限操作！！");
+            return ServerResponse.createByErrorMessage(Const.User.NOT_MANAGER);
         }
     }
 
@@ -57,7 +58,7 @@ public class ProductManageController {
     public ServerResponse setProductStatus(HttpSession session,Integer productId,Integer status) {
         User user =(User) session.getAttribute(Const.CURRENT_USER);
         if(user == null){
-            return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(),"用户未登录");
+            return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(),Const.User.NEED_LOGIN);
         }
         //校验是否管理员
         if(user.getRole() == Const.Role.ROLE_ADMIN){
@@ -65,7 +66,7 @@ public class ProductManageController {
             return iProductService.setProductStatus(productId,status);
         }
         else {
-            return ServerResponse.createByErrorMessage("无权限操作！！");
+            return ServerResponse.createByErrorMessage(Const.User.NOT_MANAGER);
         }
     }
 
@@ -73,7 +74,7 @@ public class ProductManageController {
     public ServerResponse getProductList(HttpSession session, @RequestParam(value = "pageNum",defaultValue = "1") int pageNum,@RequestParam(value = "pageSize",defaultValue = "10") int pageSize){
         User user =(User) session.getAttribute(Const.CURRENT_USER);
         if(user == null){
-            return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(),"用户未登录");
+            return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(),Const.User.NEED_LOGIN);
         }
         //校验是否管理员
         if(user.getRole() == Const.Role.ROLE_ADMIN){
@@ -81,7 +82,7 @@ public class ProductManageController {
             return iProductService.getProductList(pageNum,pageSize);
         }
         else {
-            return ServerResponse.createByErrorMessage("无权限操作！！");
+            return ServerResponse.createByErrorMessage(Const.User.NOT_MANAGER);
         }
     }
 
@@ -89,7 +90,7 @@ public class ProductManageController {
     public ServerResponse serarchProduct(HttpSession session, String productName,Integer productId,@RequestParam(value = "pageNum",defaultValue = "1") int pageNum,@RequestParam(value = "pageSize",defaultValue = "10") int pageSize){
         User user =(User) session.getAttribute(Const.CURRENT_USER);
         if(user == null){
-            return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(),"用户未登录");
+            return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(),Const.User.NEED_LOGIN);
         }
         //校验是否管理员
         if(user.getRole() == Const.Role.ROLE_ADMIN){
@@ -97,7 +98,7 @@ public class ProductManageController {
             return iProductService.secrchProduct(productName,productId,pageNum,pageSize);
         }
         else {
-            return ServerResponse.createByErrorMessage("无权限操作！！");
+            return ServerResponse.createByErrorMessage(Const.User.NOT_MANAGER);
         }
     }
 
@@ -106,7 +107,7 @@ public class ProductManageController {
 
         User user =(User) session.getAttribute(Const.CURRENT_USER);
         if(user == null){
-            return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(),"用户未登录");
+            return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(),Const.User.NEED_LOGIN);
         }
         //校验是否管理员
         if(user.getRole() == Const.Role.ROLE_ADMIN){
@@ -120,7 +121,7 @@ public class ProductManageController {
             return ServerResponse.createBySuccessData(fileMap);
         }
         else {
-            return ServerResponse.createByErrorMessage("无权限操作！！");
+            return ServerResponse.createByErrorMessage(Const.User.NOT_MANAGER);
         }
     }
 
@@ -130,7 +131,7 @@ public class ProductManageController {
         User user =(User) session.getAttribute(Const.CURRENT_USER);
         if(user == null){
             resultMap.put("success",false);
-            resultMap.put("msg","请登录管理员");
+            resultMap.put("msg",Const.User.NOT_MANAGER);
             return resultMap;
         }
         //校验是否管理员
@@ -153,7 +154,7 @@ public class ProductManageController {
         }
         else {
             resultMap.put("success",false);
-            resultMap.put("msg","无权限操作");
+            resultMap.put("msg",Const.User.NOT_MANAGER);
             return resultMap;
         }
     }

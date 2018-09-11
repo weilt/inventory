@@ -51,7 +51,6 @@ public class ProductController {
      * 排序，想当于要自已重写sql 的实现。
      * 1.list部分Key以常量+product_id+"_"+categoryId组成
      * 2.当收到前台请求时，异步执行读取数据程序。
-     * 所以，开始吧
      *
      */
 
